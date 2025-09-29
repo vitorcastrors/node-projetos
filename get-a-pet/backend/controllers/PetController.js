@@ -215,10 +215,7 @@ module.exports = class PetController {
       updatedData.color = color;
     }
 
-    if (images.length === 0) {
-      res.status(422).json({ message: "A imagem é obrigatória!" });
-      return;
-    } else {
+    if (images.length > 0) {
       updatedData.images = [];
       images.map((image) => {
         updatedData.images.push(image.filename);
@@ -296,13 +293,6 @@ module.exports = class PetController {
       res.status(422).json({
         message:
           "Houve um problema em processar a sua solicitação, tente novamente mais tarde!",
-      });
-      return;
-    }
-
-    if (pet.user._id.equals(user._id)) {
-      res.status(422).json({
-        message: "Você não pode adotar seu próprio Pet!",
       });
       return;
     }
